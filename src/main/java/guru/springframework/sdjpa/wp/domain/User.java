@@ -1,7 +1,9 @@
 package guru.springframework.sdjpa.wp.domain;
 
-
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.URL;
 
 import java.sql.Timestamp;
 
@@ -13,31 +15,39 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_login")
+    @Column(name = "user_login", nullable=false)
+    @Size(max=60)
     private String login;
 
-    @Column(name = "user_pass")
+    @Column(name = "user_pass", nullable=false)
+    @Size(max=255)
     private String password;
 
-    @Column(name = "user_nicename")
+    @Column(name = "user_nicename", nullable = false)
+    @Size(max=50)
     private String nicename;
 
-    @Column(name = "user_email")
+    @Column(name = "user_email", nullable=false)
+    @Email
     private String email;
 
-    @Column(name = "user_url")
+    @Column(name = "user_url", nullable=false)
+    @Size(max=100)
+    @URL(protocol="http")
     private String url;
 
-    @Column(name = "user_registered")
+    @Column(name = "user_registered", nullable=false)
     private Timestamp registered;
 
-    @Column(name = "user_activation_key")
+    @Column(name = "user_activation_key", nullable=false)
+    @Size(max=255)
     private String activationKey;
 
-    @Column(name = "user_status")
+    @Column(name = "user_status", nullable = false)
     private Integer status;
 
     @Basic(optional = false)
+    @Size(max=250)
     private String displayName;
 
     public Long getId() {
