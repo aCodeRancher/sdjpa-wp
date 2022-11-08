@@ -67,6 +67,9 @@ public class User {
     @Basic(optional = false)
     private String displayName;
 
+    @OneToMany(mappedBy="user")
+    private Set<Comment> comments;
+
     @OneToMany
     @JoinColumn(name = "user_id")
     private Set<UserMeta> userMetaSet;
@@ -157,5 +160,14 @@ public class User {
 
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
+    }
+
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 }
